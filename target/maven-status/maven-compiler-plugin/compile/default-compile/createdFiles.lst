@@ -1,0 +1,6 @@
+com\jotace\menu\domain\food\Food.class
+com\jotace\menu\domain\food\FoodRequest.class
+com\jotace\menu\core\exceptions\ApplicationExceptionHandler.class
+com\jotace\menu\core\exceptions\ApplicationExceptionHandler$FieldValidationError.class
+com\jotace\menu\domain\food\FoodRepository.class
+com\jotace\menu\domain\food\FoodResponse.class
