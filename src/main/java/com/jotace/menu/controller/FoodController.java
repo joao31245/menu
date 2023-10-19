@@ -14,10 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("food")
 public class FoodController {
-
     @Autowired
     FoodRepository repository;
-
     @GetMapping
     public ResponseEntity<List<FoodResponse>> GetAll() {
         var responseList = repository.findAll().stream().map(FoodResponse::new).toList();
