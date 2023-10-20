@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Food {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private Long id;
     private String title;
     private String image;

@@ -23,6 +23,12 @@ public class ApplicationExceptionHandler {
         return ResponseEntity.badRequest().body(errors.stream().map(FieldValidationError::new).toList());
 
     }
+
+    @ExceptionHandler(FoodException.class)
+    public ResponseEntity<String> equalFood(FoodException ex) {
+        return ResponseEntity.badRequest().body("Error: " + ex);
+    }
+
     private record FieldValidationError(String field, String message) {
         public FieldValidationError(FieldError error) {
             this(error.getField(), error.getDefaultMessage());
