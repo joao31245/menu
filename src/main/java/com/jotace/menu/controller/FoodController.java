@@ -17,14 +17,12 @@ public class FoodController {
     @Autowired
     FoodMethodsValidations validations;
 
-    @CrossOrigin(origins ="*", allowedHeaders = "*")
     @GetMapping
     public ResponseEntity<List<FoodResponse>> GetAll() {
         var responseList = repository.findAll().stream().map(FoodResponse::new).toList();
         return ResponseEntity.ok(responseList);
     }
 
-    @CrossOrigin(origins ="*", allowedHeaders = "*")
     @PostMapping
     @Transactional
     public ResponseEntity<FoodResponse> createFood(@RequestBody FoodRequest request, UriComponentsBuilder uriBuilder) {
