@@ -41,7 +41,9 @@ public class FoodController {
     }
     @Operation(summary = "Register a new food in the database", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Worked")
+            @ApiResponse(responseCode = "200", description = "Food registered"),
+            @ApiResponse(responseCode = "401", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "Resource not found")
     })
     @PostMapping
     @Transactional
