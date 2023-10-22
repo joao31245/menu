@@ -2,9 +2,12 @@ package com.jotace.menu.controller;
 
 import com.jotace.menu.domain.food.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,9 +24,16 @@ public class FoodController {
     @Autowired
     FoodMethodsValidations validations;
 
-    @GetMapping
-    @Operation(summary = "Get a list of all foods in the database", method = "GET")
 
+    @Operation(summary = "Get a list of all foods in the database", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Worked!"),
+            @ApiResponse(responseCode = "401", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "Resource not found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "503", description = "Service Unavailable")
+    })
+    @GetMapping()
     public ResponseEntity<List<FoodResponse>> GetAll() {
         var responseList = repository.findAll().stream().map(FoodResponse::new).toList();
         return ResponseEntity.ok(responseList);
