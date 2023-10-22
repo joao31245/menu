@@ -29,7 +29,7 @@ public class FoodController {
 
     @Operation(summary = "Get a list of all foods in the database", method = "GET")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Worked!"),
+            @ApiResponse(responseCode = "201", description = "Worked!"),
             @ApiResponse(responseCode = "401", description = "Forbidden"),
             @ApiResponse(responseCode = "404", description = "Resource not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error"),
@@ -43,7 +43,7 @@ public class FoodController {
     }
     @Operation(summary = "Register a new food in the database", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Food registered"),
+            @ApiResponse(responseCode = "201", description = "Food registered"),
             @ApiResponse(responseCode = "401", description = "Forbidden"),
             @ApiResponse(responseCode = "404", description = "Resource not found")
     })
@@ -57,9 +57,10 @@ public class FoodController {
         var uri = uriBuilder.path("/food/{id}").buildAndExpand(food.getId()).toUri();
         return ResponseEntity.created(uri).body(new FoodResponse(food));
     }
-    @DeleteMapping
+   @Operation(summary = "Delete a food that exists in the database.")
+   @DeleteMapping
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Food deleted")
+            @ApiResponse(responseCode = "204", description = "Food deleted")
     })
     public ResponseEntity<String> deleteFood(@RequestBody DeleteRequest request) {
         try {
