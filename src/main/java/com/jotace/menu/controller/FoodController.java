@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,7 +51,7 @@ public class FoodController {
     @PostMapping
     @Transactional
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<FoodResponse> createFood(@RequestBody FoodRequest request, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<FoodResponse> createFood(@RequestBody @Valid FoodRequest request, UriComponentsBuilder uriBuilder) {
         var food = new Food(request);
         validations.validations(request);
         repository.save(food);
