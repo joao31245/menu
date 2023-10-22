@@ -34,13 +34,18 @@ public class FoodController {
             @ApiResponse(responseCode = "503", description = "Service Unavailable")
     })
     @GetMapping()
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<List<FoodResponse>> GetAll() {
         var responseList = repository.findAll().stream().map(FoodResponse::new).toList();
         return ResponseEntity.ok(responseList);
     }
-
+    @Operation(summary = "Register a new food in the database", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Worked")
+    })
     @PostMapping
     @Transactional
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<FoodResponse> createFood(@RequestBody FoodRequest request, UriComponentsBuilder uriBuilder) {
         var food = new Food(request);
         validations.validations(request);
