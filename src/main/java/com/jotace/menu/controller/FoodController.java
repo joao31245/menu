@@ -37,7 +37,7 @@ public class FoodController {
             @ApiResponse(responseCode = "503", description = "Service Unavailable")
     })
     @GetMapping()
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://maria18-ai.github.io/cardapio-online/", allowedHeaders = "*")
     public ResponseEntity<List<FoodResponse>> GetAll() {
         var responseList = repository.findAll().stream().map(FoodResponse::new).toList();
         return ResponseEntity.ok(responseList);
@@ -50,7 +50,7 @@ public class FoodController {
     })
     @PostMapping
     @Transactional
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://maria18-ai.github.io/cardapio-online/", allowedHeaders = "*")
     public ResponseEntity<FoodResponse> createFood(@RequestBody @Valid FoodRequest request, UriComponentsBuilder uriBuilder) {
         var food = new Food(request);
         validations.validations(request);
